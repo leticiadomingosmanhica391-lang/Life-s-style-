@@ -1,11 +1,13 @@
 
 import React from 'react';
-import { WHATSAPP_NUMBER } from '../constants';
+import { storageService } from '../services/storageService';
 
 const WhatsAppButton: React.FC = () => {
+  const homeContent = storageService.getHomeContent();
+  
   const handleClick = () => {
-    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre os produtos da LuxeStyle.");
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    const message = encodeURIComponent(`Olá! Gostaria de saber mais sobre os produtos da ${homeContent.storeName}.`);
+    window.open(`https://wa.me/${homeContent.whatsappNumber}?text=${message}`, '_blank');
   };
 
   return (

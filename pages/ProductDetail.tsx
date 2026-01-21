@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { storageService } from '../services/storageService';
 import { Product, Order } from '../types';
-import { WHATSAPP_NUMBER } from '../constants';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,6 +10,7 @@ const ProductDetail: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>('');
   const currentUser = storageService.getCurrentUser();
+  const homeContent = storageService.getHomeContent();
 
   useEffect(() => {
     const allProducts = storageService.getProducts();
@@ -51,7 +51,7 @@ const ProductDetail: React.FC = () => {
 
     // Format WhatsApp message
     const message = encodeURIComponent(
-      `Olá! Gostaria de comprar o seguinte item:\n\n` +
+      `Olá! Gostaria de comprar o seguinte item na ${homeContent.storeName}:\n\n` +
       `*Produto:* ${product?.name}\n` +
       `*Preço:* R$ ${product?.price.toFixed(2)}\n` +
       `*Tamanho:* ${selectedSize}\n` +
@@ -59,7 +59,7 @@ const ProductDetail: React.FC = () => {
       `*Endereço:* ${currentUser.address}`
     );
 
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${homeContent.whatsappNumber}?text=${message}`, '_blank');
   };
 
   if (!product) return <div className="text-center py-20">Produto não encontrado.</div>;

@@ -8,6 +8,7 @@ import CategoryPage from './pages/CategoryPage';
 import Auth from './pages/Auth';
 import AdminDashboard from './pages/AdminDashboard';
 import WhatsAppButton from './components/WhatsAppButton';
+import AdminSettingsButton from './components/AdminSettingsButton';
 import { storageService } from './services/storageService';
 
 const Footer: React.FC = () => (
@@ -81,6 +82,7 @@ const App: React.FC = () => {
         </main>
         <Footer />
         <WhatsAppButton />
+        <AdminSettingsButton />
       </div>
     </Router>
   );

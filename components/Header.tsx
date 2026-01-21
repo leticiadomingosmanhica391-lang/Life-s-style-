@@ -7,6 +7,7 @@ import { storageService } from '../services/storageService';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentUser = storageService.getCurrentUser();
+  const homeContent = storageService.getHomeContent();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -20,7 +21,7 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-indigo-600 tracking-tight">LuxeStyle</Link>
+            <Link to="/" className="text-2xl font-bold text-indigo-600 tracking-tight">{homeContent.storeName}</Link>
           </div>
           
           <nav className="hidden md:flex space-x-8">
@@ -53,6 +54,7 @@ const Header: React.FC = () => {
 
           <div className="md:hidden flex items-center">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-400 hover:text-gray-500">
+              {/* Fix: Removed extra trailing quote and ensured proper template literal closing for icon class */}
               <i className={`fa-solid ${isMenuOpen ? 'fa-xmark' : 'fa-bars'} text-2xl`}></i>
             </button>
           </div>

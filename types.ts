@@ -35,8 +35,10 @@ export interface Order {
 }
 
 export interface HomeContent {
+  storeName: string;
   bannerTitle: string;
   bannerSubtitle: string;
   bannerImage: string;
   promoText: string;
+  whatsappNumber: string;
 }
